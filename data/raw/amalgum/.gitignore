@@ -1,0 +1,30 @@
+# general
+*.py[cod]
+__pycache__/
+.DS_Store
+
+# deps
+nlp_modules/*-dependencies
+*.pt
+
+# for pywikibot
+apicache-py3
+pywikibot.lwp
+user-config.py
+throttle.ctrl
+.idea
+
+# mediawiki scraper
+mediawiki_scraper/mwtext
+mediawiki_scraper/gum_tei
+
+target/
+lib/shibuya_entities/data
+
+# bin
+bin/datetime/heideltime-standalone
+bin/treetagger
+/target_reddit/
+/target_one/
+/target_tiny/
+/out_reddit/

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "text_compare"
+version = "0.1"
+description = "Genre-based text comparison tool"
+authors = [
+  {name = "Maria Guzenko"}
+]
+dependencies = [
+    "pandas",
+    "spacy",
+    "numpy",
+    "scikit-learn"
+]
