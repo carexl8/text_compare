@@ -34,43 +34,40 @@ with tab2:
         user_text = uploaded.read().decode("utf-8")
 
 # --- GENRE SELECTION AND FEATURE COMPARISON ---
-if user_text:
-    genres = list(genre_stats.index)
-    selected_genre = st.selectbox("Choose a genre to compare your text to:", genres)
 
-    if st.button("Compute Features & Compare"):
-        # --- COMPUTE FEATURES WITH SPINNER ---
-        with st.spinner("Computing text features…"):
-            features = compute_features(user_text)
+genres = list(genre_stats.index)
+selected_genre = st.selectbox("Choose a genre to compare your text to:", genres)
 
-        # --- BUILD COMPARISON TABLE ---
-        feature_names = {
-            "ttr": "Type-Token Ratio",
-            "lexical_density": "Lexical Density",
-            "avg_word_length": "Average Word Length",
-            "mean_sentence_length": "Mean Sentence Length",
-            "std_sentence_length": "Std Sentence Length",
-            "pos_entropy": "POS Entropy",
-            "readability_flesch_kincaid": "Readability (Flesch)",
-            "perplexity_gpt2": "GPT-2 Perplexity"
-        }
+if st.button("Compute Features & Compare"):
+    # --- COMPUTE FEATURES WITH SPINNER ---
+    with st.spinner("Computing text features…"):
+        features = compute_features(user_text)
 
-        table_data = []
-        for key, label in feature_names.items():
-            # Safe access: use None if column is missing in genre_stats or feature
-            avg_value = genre_stats.loc[selected_genre, key] if key in genre_stats.columns else None
-            user_value = features.get(key, None)
+    # --- BUILD COMPARISON TABLE ---
+    feature_names = {
+        "ttr": "Type-Token Ratio",
+        "lexical_density": "Lexical Density",
+        "avg_word_length": "Average Word Length",
+        "mean_sentence_length": "Mean Sentence Length",
+        "std_sentence_length": "Std Sentence Length",
+        "pos_entropy": "POS Entropy",
+        "readability_flesch_kincaid": "Readability (Flesch)",
+        "perplexity_gpt2": "GPT-2 Perplexity"
+    }
 
-            table_data.append({
-                "Feature": label,
-                "Average for Genre": avg_value,
-                "Your Text": user_value
-            })
+    table_data = []
+    for key, label in feature_names.items():
+        # Safe access: use None if column is missing in genre_stats or feature
+        avg_value = genre_stats.loc[selected_genre, key] if key in genre_stats.columns else None
+        user_value = features.get(key, None)
 
-        comparison_df = pd.DataFrame(table_data)
+        table_data.append({
+            "Feature": label,
+            "Average for Genre": avg_value,
+            "Your Text": user_value
+        })
 
-        st.subheader("Comparison Table")
-        st.dataframe(comparison_df)
+    comparison_df = pd.DataFrame(table_data)
 
-else:
-    st.info("Awaiting text input...")
+    st.subheader("Comparison Table")
+    st.dataframe(comparison_df)
