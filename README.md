@@ -9,18 +9,14 @@ This project allows users to compare an input English text against genre-specifi
 - Compare against genre averages
 
 ## Folder Structure
-
-01/
-
+```
+text_compare/
 ├── app/ # Streamlit app
-
 ├── data/ # Raw and processed datasets
-
 ├── src/ # Python modules (metrics, compute_stats)
-
 ├── requirements.txt # Python dependencies
-
 ├── README.md
+```
 
 ## Setup
 
@@ -53,9 +49,54 @@ streamlit run app/main.py
 
 ## Data
 
-Place .conllu files in data/raw/amalgum/
+### 1. Download AMALGUM
 
-Processed genre statistics are saved to data/processed/genre_stats.pkl
+AMALGUM is available on GitHub:
+
+**[https://github.com/gucorpling/amalgum](https://github.com/gucorpling/amalgum)**
+
+Download the repository (or clone it):
+
+```
+git clone https://github.com/gucorpling/amalgum.git
+```
+
+
+### 2. Copy the `.conllu` files into the project
+
+Place all `.conllu` files into:
+
+```
+data/raw/amalgum/
+```
+
+Your folder should look like:
+
+```
+data/
+ └── raw/
+     └── amalgum/
+         ├── amalgum_academic.conllu
+         ├── amalgum_biography.conllu
+         ├── ...
+```
+
+### 3. Process genre statistics
+
+The first time you run the project, you may need to generate summary stats:
+
+```
+data/processed/genre_stats.pkl
+```
+
+These are created automatically by running:
+
+```
+python src/text_compare/compute_stats.py
+```
+
+If the file already exists, you don’t need to regenerate it.
+
 
 ## License
 
