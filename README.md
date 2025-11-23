@@ -24,19 +24,32 @@ This project allows users to compare an input English text against genre-specifi
 
 ## Setup
 
-1. Create a conda environment (optional):
+### 1. Create and activate a conda environment (optional but recommended)
 
-bash
-conda create -n txt_compare python=3.12
+```
+conda create -n txt_compare python=3.12 pip
 conda activate txt_compare
+```
 
-2. Install dependencies:
+### 2. Install dependencies
 
+```
 pip install -r requirements.txt
+```
 
-3. Run the app:
+### 3. (Recommended) Install the package in editable mode
 
+This ensures Python correctly finds the `src/` modules:
+
+```
+pip install -e .
+```
+
+### 4. Run the Streamlit app
+
+```
 streamlit run app/main.py
+```
 
 ## Data
 
